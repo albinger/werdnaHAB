@@ -1,0 +1,24 @@
+sitemap test label="Albinger House"
+{
+  Frame label="Lights"{
+	Switch item=Light_Living_wall
+	Slider item=Light_Kitchen_ceiling switchSupport
+	Switch item=Light_Kitchen_table
+	Slider item=Light_Family_fireplace
+	Switch item=Light_Master_sinks 
+	Switch item=Light_Master_bathtub
+
+  }
+ Frame label="astro"{
+ 
+	Text item=Azimuth
+	Text item=Elevation
+	Text item=Sunrise_Time
+	Text item=Noon_Time
+	Text item=Sunset_Time  
+
+  }
+
+}
+
+

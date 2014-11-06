@@ -1,0 +1,26 @@
+sitemap demo label="Albinger House"
+{
+  Frame label="Lights"{
+	Switch item=Light_Outside_front icon="WemoSwitch"
+	Switch item=Light_Living_wall
+	Slider item=Light_Kitchen_ceiling switchSupport
+	Switch item=Light_Kitchen_table
+	Slider item=Light_Family_fireplace
+	Switch item=Light_Office_bench icon="WemoPlug"
+	Switch item=Light_Master_sinks 
+	Switch item=Light_Master_bathtub
+
+  }
+  Frame label="Nest Thermostat" {
+        Text item=curNestTemp valuecolor=[curNestTemp=="Uninitialized"="lightgray",curNestTemp>75="red",>70="orange",>68="green",<=67="blue"]
+  }
+  Group label="Lighting Zones" icon="house" {
+	Switch item=Lights  mappings=[OFF="All Off", ON="All On"]
+	Switch item=Kitchen mappings=[OFF="All Off", ON="All On"]
+  }
+ Group label="Aquarium" icon="aquarium" {
+        Switch item=AquariumLightMqtt
+        Switch item=AquariumColorMqtt mappings=[OFF=Blue, ON=White]
+  }
+
+}

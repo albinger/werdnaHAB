@@ -1,0 +1,6 @@
+Switch button_1  "button 1"     (button)   {zwave="9:0:command=SCENE_ACTIVATION,scene=1,state=1"}
+Switch button_2  "button 2"     (button)   {zwave="9:0:command=SCENE_ACTIVATION,scene=2,state=1"}
+Switch button_3  "button 3"     (button)   {zwave="9:0:command=SCENE_ACTIVATION,scene=3,state=1"}
+Switch button_4  "button 4"     (button)   {zwave="9:0:command=SCENE_ACTIVATION,scene=4,state=1"}
+
+Switch DummySwitch1 "Test1"

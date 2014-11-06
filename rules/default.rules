@@ -1,0 +1,98 @@
+import org.openhab.core.library.types.*
+import java.lang.Math
+
+rule "Switch lights off"
+when
+    Time cron "0 5 1 * * ?"
+then
+    logInfo("Rules.log", "Running rule Switch lights off")
+    sendCommand(Lights, OFF)
+end
+
+rule "Aquarium Morning On"
+when
+    Time cron "0 0 8 * * ?"
+then
+    logInfo("RUles.log", "Aquarium Morning On")
+
+    sendCommand(AquariumLightMqtt, ON)
+    sendCommand(AquariumColorMqtt, OFF)
+end
+
+rule "Aquarium Day On"
+when
+    Time cron "0 45 8 * * ?"
+then
+    logInfo("RUles.log", "Aquarium Day On")
+    sendCommand(AquariumColorMqtt, ON)
+    sendCommand(AquariumLightMqtt, ON)
+end
+
+rule "Aquarium Dusk On"
+when
+    Time cron "0 0 21  * * ?"
+then
+    logInfo("RUles.log", "Aquarium Dusk On")
+    sendCommand(AquariumColorMqtt, OFF)
+    sendCommand(AquariumLightMqtt, ON)
+end
+
+
+rule "Aquarium Off"
+when
+    Time cron "0 47 22 * * ?"
+then
+    logInfo("RUles.log", "Aquarium Off")
+    sendCommand(AquariumLightMqtt, OFF)
+end
+
+rule "Homecoming Lights"
+when
+    Item PresenceAndrewMqttHome changed from OFF to ON
+then
+        logInfo("Rules.log", "Running rule Homecoming Lights")
+	var hour   = now.getHourOfDay
+	if (hour > 18 ){
+           sendCommand(Light_Outside_front, ON)
+	} else if (hour < 3 ){
+	   sendCommand(Light_Outside_front, ON)
+	}
+end
+
+
+rule "Cael Light"
+when
+    Time cron "0 40 17 * * ?"
+then
+    logInfo("RUles.log", "Cael ON")
+    sendCommand(Light_Living_wall, ON)
+end
+
+rule "ZMETESTon"
+when
+	Item button_1 received update ON
+then
+	sendCommand(Light_Office_bench, ON)
+end
+
+rule "ZMETESToff"
+when
+	Item button_2 received update ON
+then
+	sendCommand(Light_Office_bench, OFF)
+end
+
+rule "ZMETEST2on"
+when
+        Item button_3 received update ON
+then
+        sendCommand(Light_Living_wall, ON)
+end
+
+rule "ZMETEST2off"
+when
+        Item button_4 received update ON
+then
+        sendCommand(Light_Living_wall, OFF)
+end
+

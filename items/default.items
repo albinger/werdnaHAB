@@ -1,0 +1,29 @@
+Group All
+Group living 		(All)
+Group Status 	(All)
+Group location
+Group Aquarium
+
+
+/* active groups */
+Group:Switch:OR(ON, OFF) 		Lights 		"All Lights [(%d)]" 								(All)
+Group:Switch:OR(ON, OFF)		Kitchen	"Kitchen Lights [(%d)]" (Kitchen)
+
+Switch Light_Kitchen_table 	"Kitchen Table" 		(Kitchen, Lights) {zwave="3"}
+Switch Light_Living_wall 	"Living Room Lamp" 		(living, Lights) {zwave="4"}
+Dimmer Light_Kitchen_ceiling "Kitchen [%d %%]" (Lights, Kitchen) {zwave="6:0:command=SWITCH_MULTILEVEL,refresh_interval=60,restore_last_value=true"}
+Dimmer Light_Family_fireplace "Fireplace [%d %%]" (Lights, Kitchen) {zwave="5:0:command=SWITCH_MULTILEVEL,refresh_interval=60,restore_last_value=true"}
+Switch Light_Master_sinks	"Bathroom Sinks"	(Bathroon, Lights) {zwave="7"}
+Switch Light_Master_bathtub	"Bathroom Bathtub"	(Bathroon, Lights) {zwave="8"}
+Switch Light_Outside_front	"Outside Light" (Lights) {wemo="outside"}
+Switch Light_Office_bench	"Office Workbench Lamp" (Lights) {wemo="office"}
+Switch AquariumColorMqtt "Aquarium Color"   <tank> {mqtt=">[mosquitto:aquariumLight/color:command:ON:0],>[mosquitto:aquariumLight/color:command:OFF:1]"}
+Switch AquariumLightMqtt "Aquarium Light" (Aquarium,Lights) {mqtt=">[mosquitto:aquariumLight/command:command:ON:1],>[mosquitto:aquariumLight/command:command:OFF:0]"}
+Switch  PresenceAndrewMqttHome   "Andrew @ Home" (location)   { mqttitude="mosquitto:owntracks/werdna/motoX:home" }
+Switch  PresenceBrokenMqttHome   "testing MQTT"   (location) { mqttitute="mosquitto:owntracks/#:home" }
+Number MqttLongitude "longitude [%f]"  (location) {mqtt="<[mosquitto:owntracks/werdna/motoX:state:JS(GetLongitude.js)]"}
+Number MqttLatitude "latitude [%f]" (location) {mqtt="<[mosquitto:owntracks/werdna/motoX:state:JS(GetLatitude.js)]"}
+String LocationURL {mqtt="<[mosquitto:owntracks/werdna/motoX:state:JS(mqttitudecoordinates.js)]"}
+/* Nest Thermostat Stuff */
+Number curNestTemp   "Current Temp [%.1f F]"  <nest> (Weather_Chart,gFF) { http="<[nest:60000:JS(GetNestValue.js)]"}
+Number curNestTargetTemp   "Target [%.1f F]"  <temperature> (Weather_Chart,gFF) { http="<[nest:60000:JS(GetNestTargetValue.js)]"}

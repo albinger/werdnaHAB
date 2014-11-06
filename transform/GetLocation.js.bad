@@ -1,0 +1,4 @@
+var url = JSON.parse(input).lon;
+url = url + ","
+url = url + JSON.parse(input).lat;
+return(url);

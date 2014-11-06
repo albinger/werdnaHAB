@@ -1,0 +1,29 @@
+sitemap full label="Albinger House Full View"
+{
+  Frame label="Lights"{
+	Switch item=Light_Outside_front icon="WemoSwitch"
+	Switch item=Light_Living_wall
+	Slider item=Light_Kitchen_ceiling switchSupport
+	Switch item=Light_Kitchen_table
+	Slider item=Light_Family_fireplace
+	Switch item=Light_Office_bench icon="WemoPlug"
+  }
+  Frame label="Nest Thermostat" {
+        Text item=curNestTemp valuecolor=[curNestTemp=="Uninitialized"="lightgray",curNestTemp>75="red",>70="orange",>68="green",<=67="blue"]
+  }
+  Group label="Lighting Zones" icon="house" {
+	Switch item=Lights  mappings=[OFF="All Off", ON="All On"]
+	Switch item=Kitchen mappings=[OFF="All Off", ON="All On"]
+  }
+  Group label="open tracking" icon="map"{
+	Webview url="https://173.25.21.34:8766/static/map.html" height=12
+ 	Switch item=PresenceAndrewMqttHome icon="present"
+	Text item=MqttLatitude
+	Text item=MqttLongitude
+  }
+  Group label="Aquarium" icon="aquarium" {
+        Switch item=AquariumLightMqtt
+        Switch item=AquariumColorMqtt mappings=[OFF=Blue, ON=White]
+  }
+       
+}
